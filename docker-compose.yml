@@ -15,6 +15,7 @@ services:
       TZ: Asia/Shanghai
       SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://development:Welcome1@db/test
       STAGE: development
+      FLASK_DEBUG: 1
     networks:
       - default
   db:
