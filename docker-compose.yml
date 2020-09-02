@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  flask:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    volumes:
+      - "./src:/app"
+      - "./migrations:/app/migrations"
+    tty: true
+    environment:
+      TZ: Asia/Shanghai
+      SQLALCHEMY_DATABASE_URI: postgresql+psycopg2://development:Welcome1@db/test
+      STAGE: development
+    networks:
+      - default
+  db:
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Welcome1
+      POSTGRES_DB: development
+    image: postgres:latest
+    networks:
+      - default
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
